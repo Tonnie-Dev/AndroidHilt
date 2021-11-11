@@ -36,16 +36,25 @@ will be destroyed when the app process is destroyed.
 
 class ServiceLocator(applicationContext: Context) {
 
+    /* The ServiceLocator creates and stores dependencies that are obtained
+    on demand by the classes that need them. You can think of it as a container
+     of dependencies  that is attached to the app's lifecycle, which means
+     it will be destroyed when the app process is destroyed.*/
+
+    //ROOM
     private val logsDatabase = Room.databaseBuilder(
         applicationContext,
         AppDatabase::class.java,
         "logging.db"
     ).build()
 
+    //DATA SOURCE
     val loggerLocalDataSource = LoggerLocalDataSource(logsDatabase.logDao())
 
+    //DATE FORMATTER
     fun provideDateFormatter() = DateFormatter()
 
+    //INTERFACE APPNAVIGATOR
     fun provideNavigator(activity: FragmentActivity): AppNavigator {
         return AppNavigatorImpl(activity)
     }
