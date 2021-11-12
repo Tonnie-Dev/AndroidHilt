@@ -30,10 +30,13 @@ import com.example.android.hilt.R
 import com.example.android.hilt.data.Log
 import com.example.android.hilt.data.LoggerLocalDataSource
 import com.example.android.hilt.util.DateFormatter
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Fragment that displays the database logs.
  */
+
+@AndroidEntryPoint
 class LogsFragment : Fragment() {
 
     private lateinit var logger: LoggerLocalDataSource
@@ -55,6 +58,8 @@ class LogsFragment : Fragment() {
         }
     }
 
+
+    /*Called when a Fragment is first attached to a host Activity*/
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
