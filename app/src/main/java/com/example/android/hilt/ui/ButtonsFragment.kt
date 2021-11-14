@@ -28,7 +28,10 @@ import com.example.android.hilt.R
 import com.example.android.hilt.data.LoggerLocalDataSource
 import com.example.android.hilt.navigator.AppNavigator
 import com.example.android.hilt.navigator.Screens
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 /**
  * Fragment that displays buttons whose interactions are recorded.
  */
