@@ -42,9 +42,14 @@ import javax.inject.Inject
 /*To make LogsFragment use Hilt, we have to annotate it with
 @AndroidEntryPoint:*/
 
+/*Annotating Android classes with @AndroidEntryPoint creates
+ a dependencies container that follows the Android class
+ lifecycle.*/
+
 @AndroidEntryPoint
 class LogsFragment : Fragment() {
 
+    //Hilt will now be in charge of populating those fields for us
     //fields injected by Hilt cannot be private
     @Inject lateinit var logger: LoggerLocalDataSource
     @Inject lateinit var dateFormatter: DateFormatter
@@ -68,19 +73,19 @@ class LogsFragment : Fragment() {
         }
     }
 
+    /*
+       /*Called when a Fragment is first attached to a host Activity*/
+       override fun onAttach(context: Context) {
+           super.onAttach(context)
 
-    /*Called when a Fragment is first attached to a host Activity*/
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+          populateFields(context)
+       }
 
-      //  populateFields(context)
-    }
-
-    /*private fun populateFields(context: Context) {
-        logger = (context.applicationContext as LogApplication).serviceLocator.loggerLocalDataSource
-        dateFormatter =
-            (context.applicationContext as LogApplication).serviceLocator.provideDateFormatter()
-    }*/
+      private fun populateFields(context: Context) {
+           logger = (context.applicationContext as LogApplication).serviceLocator.loggerLocalDataSource
+           dateFormatter =
+               (context.applicationContext as LogApplication).serviceLocator.provideDateFormatter()
+       }*/
 
     override fun onResume() {
         super.onResume()
